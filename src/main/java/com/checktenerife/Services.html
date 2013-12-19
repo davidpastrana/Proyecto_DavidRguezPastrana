@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wicket="http://wicket.apache.org"
+	xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd http://wicket.apache.org">
+  <head>
+
+  </head>
+  <body>
+  <wicket:extend>
+<form wicket:id="form">
+    Select a type: <select wicket:id="types"></select>
+<div><input type="submit" value="submit"/></div>
+</form>
+
+
+
+  <h1>Upcoming DrupalCamps</h1>
+  
+    <div id="map_wrapper" class="item gradient ui-corner-all shadow-all">
+      <div id="map_canvas"></div>
+    </div>
+
+    <!-- Event 1: DrupalCamp Toulouse -->
+    <div itemscope itemtype="http://schema.org/Event" class="event gradient ui-corner-all shadow-all">
+      <h2><a href="http://lin-clark.com/drupalcamp_fr" itemprop="url"><span itemprop="name" class="name">DrupalCamp Toulouse 2011</span></a></h2>
+      <img itemprop="image" class="logo shadow-all" src="images/drupalicon_fr.png" />
+      <div itemprop="location" itemscope itemtype="http://schema.org/Place">
+        <span itemprop="name" class="place-name">ENSEEIHT</span><br />
+        <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <span itemprop="streetAddress">Rue Sylvain Dauriac</span><br />
+          <span itemprop="addressLocality">Toulouse</span>,
+          <span itemprop="addressRegion">Haute-Garonne</span>,
+          <span itemprop="addressCountry">FR</span>
+        </span>
+      </div>
+ 
+        <time itemprop="startDate" datetime="2011-11-26T09:00:00+01:00">November 26, 10:00am</time> &ndash;
+        <time itemprop="endDate" datetime="2011-11-27T17:00:00+01:00">November 27, 6:00pm</time>
+
+    </div>
+
+    <!-- Event 2: DrupalCamp Ohio -->
+    <div itemscope itemtype="http://schema.org/Event" class="event gradient ui-corner-all shadow-all">
+      <h2><a href="http://lin-clark.com/drupalcampohio" itemprop="url"><span itemprop="name" class="name">Drupalcamp Ohio 2011</span></a></h2>
+      <img itemprop="image" src='images/drupalicon_oh.png' class="logo shadow-all" />
+      <div itemprop="location" itemscope itemtype="http://schema.org/Place" class="location">
+        <span itemprop="name" class="place-name">The Ohio State University</span><br /> 
+        <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <span itemprop="streetAddress">C/ Pepita Serrador</span><br />
+          <span itemprop="addressLocality">38005</span>,
+          <span itemprop="addressRegion">Tenerife</span>,
+          <span itemprop="addressCountry">ES</span>
+        </span>
+      </div>
+      <div class="date">
+        <time itemprop="startDate" datetime="2011-12-03T09:00:00-05:00">December 3, 9:00am</time> &ndash;
+        <time itemprop="endDate" datetime="2011-12-03T17:00:00-05:00">5:00pm</time>
+      </div>
+    </div>
+
+
+
+
+    
+    <table class="accomodationTable">
+    <thead>
+    <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Place</th>
+        <th>Category</th>
+        <th colspan="7">Address</th>
+        <th>Availability</th>
+		<th>Total Places</th>
+        <th>Phone</th>
+        <th>Fax</th>
+        <th>Email</th>
+        <th>Link</th>
+        <th>Search</th>
+    </tr>
+   	</thead>
+   	<tbody>
+  		<tr wicket:id="rows" itemscope itemtype="http://schema.org/Event" class="event gradient ui-corner-all shadow-all">
+  		
+  	
+  		
+  		
+  		
+  		
+  		<td><span wicket:id="type" /></td>    
+    	<td><h2><a href="http://lin-clark.com/drupalcampohio" itemprop="url"><span itemprop="name" class="place-name"><span wicket:id="name" /></span></a></h2></td>
+    	<td><span wicket:id="place" /></td>
+   		<td><span wicket:id="category" /></td>
+   		<td>		
+   		<div itemprop="location" itemscope itemtype="http://schema.org/Place" class="location">
+   		
+        	<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+       			<span itemprop="streetAddress"><span wicket:id="address" /></span>, 
+       			<span wicket:id="number" /><br />
+				<span itemprop="addressLocality"><span wicket:id="postalCode" /></span><br />
+        		<span wicket:id="xCoordinate" />,
+        		<span wicket:id="yCoordinate" />,
+        		<span wicket:id="altitude" /><br />
+        		<span wicket:id="municipality" /><br />
+        		<span itemprop="addressRegion">Tenerife</span>,
+        		<span itemprop="addressCountry">ES</span>
+        	</span>
+        </div>
+        <div class="date">
+        <time itemprop="startDate" datetime="2011-12-03T09:00:00-05:00">December 3, 9:00am</time> &ndash;
+        <time itemprop="endDate" datetime="2011-12-03T17:00:00-05:00">5:00pm</time>
+      </div>
+        </td>
+        <td><span wicket:id="availability" /></td>
+        <td><span wicket:id="totalPlaces" /></td>
+        <td><span wicket:id="phone" /></td>
+        <td><span wicket:id="fax" /></td>
+        <td><span wicket:id="email" /></td>
+        <td><span wicket:id="link" /></td>
+        <td><a href="#" wicket:id="googlelink" /></td>
+    </tr>
+    </tbody>
+    </table>
+    Here we will display the data obtained from Datasets / API's.<br/>
+	The data will be geolocalized and reachable with the fastest way to take destination.
+	
+	<!--  <table wicket:id="accommodations" class="contacts"></table>-->
+  </wicket:extend>
+ </body>
+</html>
