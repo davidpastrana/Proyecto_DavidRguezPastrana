@@ -11,7 +11,6 @@ public class Accommodation implements Serializable {
 	private String category;
 	private String place;
 	private String address;
-	private Integer number;
 	private Integer postalCode;
 	private Float xCoordinate;
 	private Float yCoordinate;
@@ -31,7 +30,7 @@ public class Accommodation implements Serializable {
 		return address;
 	}
 
-	public float getAltitude() {
+	public Float getAltitude() {
 		return altitude;
 	}
 
@@ -63,10 +62,6 @@ public class Accommodation implements Serializable {
 		return name;
 	}
 
-	public Integer getNumber() {
-		return number;
-	}
-
 	public String getPhone() {
 		return phone;
 	}
@@ -75,10 +70,7 @@ public class Accommodation implements Serializable {
 		return place;
 	}
 
-	public int getPostalCode() {
-		if (postalCode == null) {
-			postalCode = 0;
-		}
+	public Integer getPostalCode() {
 		return postalCode;
 	}
 
@@ -90,11 +82,11 @@ public class Accommodation implements Serializable {
 		return type;
 	}
 
-	public float getxCoordinate() {
+	public Float getxCoordinate() {
 		return xCoordinate;
 	}
 
-	public float getyCoordinate() {
+	public Float getyCoordinate() {
 		return yCoordinate;
 	}
 
@@ -136,10 +128,6 @@ public class Accommodation implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
 	}
 
 	public void setPhone(String phone) {

@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.Model;
@@ -19,13 +20,19 @@ import org.slf4j.LoggerFactory;
 
 public class Services extends HomePage {
 
-	private final String in = "/Users/David/Dropbox/bigdata_shared/remote/bigdata/alojamientos.csv"; // fichero de entrada
+	private static final long serialVersionUID = 1L;
+
 	static int nfil, ncol;
 	private static Accommodation ac;
 	private static List<Accommodation> list = new ArrayList<Accommodation>();
+	private static List<Accommodation> origList = new ArrayList<Accommodation>();
 	private final static Logger log = LoggerFactory.getLogger(Services.class);
 
-	public Services() {
+	String selected = null;
+
+	PropertyListView<Accommodation> listView;
+
+	public Services() throws IOException {
 
 		//		//Connection to database
 		//		PostgreConnection con = new PostgreConnection();
@@ -50,30 +57,25 @@ public class Services extends HomePage {
 		//			log.info("No connection!!");
 		//		}
 
-		//Read Excel file
-		try {
-			readAccommodationFile(in);
-		} catch (IOException e) {
-			e.printStackTrace();
+		//		log.info("Size of List " + list.size());
+		//		log.info("Size of origList " + origList.size());
+		if (!list.isEmpty()) {
+			list.clear();
 		}
-
+		if (!origList.isEmpty()) {
+			origList.clear();
+		}
+		readFile();
+		origList.addAll(list);
 		displayForm();
-
-		//Display data
-		displayAccommodation();
+		listView = displayAccommodation("rows", list);
+		add(listView);
 	}
 
-	public void displayAccommodation() {
-		//		Form form = null;
-		//		List<String> types = Arrays.asList("apple", "strawberry", "watermelon");
-		//		form.add(new DropDownChoice<String>("types", new Model(), types));
+	public PropertyListView<Accommodation> displayAccommodation(String id, List<Accommodation> list) {
 
-		PropertyListView<Accommodation> listView = new PropertyListView<Accommodation>("rows", list) {
+		PropertyListView<Accommodation> listView = new PropertyListView<Accommodation>(id, list) {
 			private static final long serialVersionUID = 1L;
-
-			public void onClick() {
-
-			}
 
 			@Override
 			public void populateItem(final ListItem<Accommodation> item) {
@@ -81,67 +83,185 @@ public class Services extends HomePage {
 				item.add(new Label("name", new PropertyModel<Accommodation>(ac, "name")));
 				item.add(new Label("type", ac.getType()));
 				item.add(new Label("category", ac.getCategory()));
-				item.add(new Label("place", ac.getPlace()));
+				if (ac.getPlace() != null) {
+					item.add(new Label("placeTag", "Situación: "));
+					item.add(new Label("place", ac.getPlace()));
+				} else {
+					item.add(new Label("placeTag").setVisible(false));
+					item.add(new Label("place").setVisible(false));
+				}
 				item.add(new Label("address", ac.getAddress()));
-				item.add(new Label("number", ac.getNumber()));
-				item.add(new Label("postalCode", ac.getPostalCode()));
-				item.add(new Label("xCoordinate", ac.getxCoordinate()));
-				item.add(new Label("yCoordinate", ac.getyCoordinate()));
-				item.add(new Label("altitude", ac.getAltitude()));
+				if (ac.getPostalCode() != null) {
+					item.add(new Label("postalcodeTag", ", "));
+					item.add(new Label("postalCode", ac.getPostalCode()));
+				} else {
+					item.add(new Label("postalcodeTag").setVisible(false));
+					item.add(new Label("postalCode").setVisible(false));
+				}
+				if (ac.getxCoordinate() != null || ac.getyCoordinate() != null) {
+					item.add(new Label("xCoordinate", ac.getxCoordinate()));
+					item.add(new Label("yCoordinate", ac.getyCoordinate()));
+				} else {
+					item.add(new Label("xCoordinate").setVisible(false));
+					item.add(new Label("yCoordinate").setVisible(false));
+				}
+				if (ac.getAltitude() != null) {
+					item.add(new Label("altitude", ac.getAltitude()));
+				} else {
+					item.add(new Label("altitude").setVisible(false));
+				}
 				item.add(new Label("municipality", ac.getMunicipality()));
 				item.add(new Label("availability", ac.getAvailability()));
 				item.add(new Label("totalPlaces", ac.getTotalPlaces()));
-				item.add(new Label("phone", ac.getPhone()));
-				item.add(new Label("fax", ac.getFax()));
-				item.add(new Label("email", ac.getEmail()));
-				String fullName = ac.getName();
-				String googleQuery = "http://www.google.com/search?q=" + fullName.replace(" ", "+");
-				item.add(new Label("link", ac.getLink()));
-				item.add(new Label("googlelink", googleQuery));
+				if (ac.getPhone() != null) {
+					item.add(new Label("phoneTag", "Teléfono: "));
+					item.add(new Label("phone", ac.getPhone()));
+				} else {
+					item.add(new Label("phoneTag").setVisible(false));
+					item.add(new Label("phone").setVisible(false));
+				}
+				if (ac.getFax() != null) {
+					item.add(new Label("faxTag", "Fax: "));
+					item.add(new Label("fax", ac.getFax()));
+				} else {
+					item.add(new Label("faxTag").setVisible(false));
+					item.add(new Label("fax").setVisible(false));
+				}
+				if (ac.getEmail() != null) {
+					item.add(new Label("emailTag", "Email: "));
+					item.add(new ExternalLink("email", "mailto:" + ac.getEmail(), ac.getEmail()));
+				} else {
+					item.add(new Label("emailTag").setVisible(false));
+					item.add(new Label("email").setVisible(false));
+				}
+				if (ac.getLink() != null) {
+					item.add(new Label("websiteTag", "Web: "));
+					item.add(new ExternalLink("link", "http://" + ac.getLink(), ac.getLink()));
+				} else {
+					item.add(new Label("websiteTag").setVisible(false));
+					item.add(new Label("link").setVisible(false));
+				}
+				item.add(new ExternalLink("googlelink", "http://www.google.com/search?q=" + ac.getName().replace(" ", "+")));
 			}
 		};
-		add(listView);
+		return listView;
 	}
 
 	public void displayForm() {
 
-		Form<Accommodation> form = new Form<Accommodation>("form"); // (1)
-		add(form);
+		final Form<Accommodation> formTypes = new Form<Accommodation>("formTypes"); // (1)
+		add(formTypes);
+		final Form<Accommodation> formCategories = new Form<Accommodation>("formCategories"); // (1)
+		add(formCategories);
+		final Form<Accommodation> formPlaces = new Form<Accommodation>("formPlaces"); // (1)
+		add(formPlaces);
+
 		List<String> types = new ArrayList<String>();
 		for (Accommodation ac : list) {
-			log.info("Tipo " + ac.getType());
 			String type = ac.getType();
 			if (!types.contains(type)) {
 				types.add(type);
 			}
 		}
-		form.add(new DropDownChoice<String>("types", new Model<String>(), types));
-		//		addLocationForm.add(nameLabel);
-		//		TextField<String> nameField = new TextField<String>("name"); // (3)
-		//		addLocationForm.add(nameField);
-		//		Button submitButton = new Button("submitButton") { // (4)
-		//			@Override
-		//			public void onSubmit() {
-		//				System.out.println("OnSubmit, name = " + name);
-		//			}
-		//		};
-		//		addLocationForm.add(submitButton);
 
+		List<String> categories = new ArrayList<String>();
+		for (Accommodation ac : list) {
+			String category = ac.getCategory();
+			if (!categories.contains(category)) {
+				categories.add(category);
+			}
+		}
+
+		List<String> places = new ArrayList<String>();
+		for (Accommodation ac : list) {
+			String place = ac.getPlace();
+			if (!places.contains(place)) {
+				places.add(place);
+			}
+		}
+
+		formTypes.add(new DropDownChoice<String>("types", new Model<String>(), types) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void onSelectionChanged(String newSelection) {
+				selected = newSelection;
+				list.clear();
+				for (Accommodation ac : origList) {
+					if (ac.getType().equals(selected)) {
+						list.add(ac);
+					}
+				}
+			}
+
+			@Override
+			protected boolean wantOnSelectionChangedNotifications() {
+				return true;
+			}
+
+		});
+
+		formCategories.add(new DropDownChoice<String>("categories", new Model<String>(), categories) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void onSelectionChanged(String newSelection) {
+				selected = newSelection;
+				list.clear();
+				for (Accommodation ac : origList) {
+					if (ac.getCategory().equals(selected)) {
+						list.add(ac);
+					}
+				}
+			}
+
+			@Override
+			protected boolean wantOnSelectionChangedNotifications() {
+				return true;
+			}
+
+		});
+
+		formPlaces.add(new DropDownChoice<String>("places", new Model<String>(), places) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void onSelectionChanged(String newSelection) {
+				selected = newSelection;
+				list.clear();
+				for (Accommodation ac : origList) {
+					if (ac.getPlace() != " ") {
+						if (ac.getPlace().equals(selected)) {
+							list.add(ac);
+						}
+					}
+				}
+			}
+
+			@Override
+			protected boolean wantOnSelectionChangedNotifications() {
+				return true;
+			}
+
+		});
 	}
 
-	public void readAccommodationFile(String in) throws IOException {
+	private void readFile() throws IOException {
 
-		File f = new File(in);
+		File f = new File("/Users/David/Dropbox/bigdata_shared/remote/bigdata/alojamientos.csv");
 		if (!f.exists()) {
 			log.info("Error file does not exist");
 		} else {
-			FileReader fr = new FileReader(f);
+			FileReader fr = null;
+			fr = new FileReader(f);
 			BufferedReader br = new BufferedReader(fr);
-
 			nfil = 0;
 			ncol = 0;
 			String linea = "";
-			br.readLine(); //first line depreciated
+			br.readLine();
 			while ((linea = br.readLine()) != null) {
 				ncol = 0;
 				String[] atributos = linea.split(";");
@@ -159,16 +279,22 @@ public class Services extends HomePage {
 						ac.setCategory(atributos[ncol]);
 						break;
 					case 3:
-						ac.setPlace(atributos[ncol]);
+						if (atributos[ncol].equals("")) {
+							ac.setPlace(null);
+						} else {
+							ac.setPlace(atributos[ncol]);
+						}
 						break;
 					case 4:
 						ac.setAddress(atributos[ncol]);
 						break;
 					case 5:
-						if (atributos[ncol].contains("-")) {
-							ac.setNumber(Integer.valueOf(atributos[ncol].split("-")[0]));
-						} else {
-							ac.setNumber(Integer.valueOf(atributos[ncol]));
+						if (!atributos[ncol].contains("0")) {
+							if (atributos[ncol].contains("-")) {
+								ac.setAddress(atributos[4] + " " + Integer.valueOf(atributos[ncol].split("-")[0]));
+							} else {
+								ac.setAddress(atributos[4] + " " + Integer.valueOf(atributos[ncol]));
+							}
 						}
 						break;
 					case 6:
@@ -179,21 +305,33 @@ public class Services extends HomePage {
 						}
 						break;
 					case 7:
-						if (atributos[ncol].contains(",")) {
-							ac.setxCoordinate(Float.valueOf(atributos[ncol].replace(",", ".")));
+						if (atributos[ncol].equals("0")) {
+							ac.setxCoordinate(null);
 						} else {
-							ac.setxCoordinate(Float.valueOf(atributos[ncol]));
+							if (atributos[ncol].contains(",")) {
+								ac.setxCoordinate(Float.valueOf(atributos[ncol].replace(",", ".")));
+							} else {
+								ac.setxCoordinate(Float.valueOf(atributos[ncol]));
+							}
 						}
 						break;
 					case 8:
-						if (atributos[ncol].contains(",")) {
-							ac.setyCoordinate(Float.valueOf(atributos[ncol].replace(",", ".")));
+						if (atributos[ncol].equals("0")) {
+							ac.setyCoordinate(null);
 						} else {
-							ac.setyCoordinate(Float.valueOf(atributos[ncol]));
+							if (atributos[ncol].contains(",")) {
+								ac.setyCoordinate(Float.valueOf(atributos[ncol].replace(",", ".")));
+							} else {
+								ac.setyCoordinate(Float.valueOf(atributos[ncol]));
+							}
 						}
 						break;
 					case 9:
-						ac.setAltitude(Float.valueOf(atributos[ncol]));
+						if (atributos[ncol].equals("0")) {
+							ac.setAltitude(null);
+						} else {
+							ac.setAltitude(Float.valueOf(atributos[ncol]));
+						}
 						break;
 					case 10:
 						ac.setMunicipality(atributos[ncol]);
@@ -205,13 +343,25 @@ public class Services extends HomePage {
 						ac.setTotalPlaces(Integer.valueOf(atributos[ncol]));
 						break;
 					case 13:
-						ac.setPhone(atributos[ncol]);
+						if (atributos[ncol].equals("")) {
+							ac.setPhone(null);
+						} else {
+							ac.setPhone(atributos[ncol]);
+						}
 						break;
 					case 14:
-						ac.setFax(atributos[ncol]);
+						if (atributos[ncol].equals("")) {
+							ac.setFax(null);
+						} else {
+							ac.setFax(atributos[ncol]);
+						}
 						break;
 					case 15:
-						ac.setEmail(atributos[ncol]);
+						if (atributos[ncol].equals("")) {
+							ac.setEmail(null);
+						} else {
+							ac.setEmail(atributos[ncol]);
+						}
 						break;
 					case 16:
 						ac.setLink(atributos[ncol]);
@@ -220,6 +370,10 @@ public class Services extends HomePage {
 					ncol++;
 				}
 				list.add(ac);
+				log.info("fila ");
+				if (nfil == 2) {
+					break;
+				}
 				nfil++;
 			}
 			br.close();
