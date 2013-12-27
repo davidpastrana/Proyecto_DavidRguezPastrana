@@ -3,19 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wicket="http://wicket.apache.org"
 	xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd http://wicket.apache.org">
   <wicket:head>
-
   </wicket:head>
   <body>
   <wicket:extend> 
-          <script type="text/javascript">
-  $(document).ready(function() {
-alert("proba");
-	$("#name").each(function()) {
-		alert("eyy");
-	}
-  });
-
-  </script>
     <div class="alignContentPage">
 	<table class="selectAccommodationTable">
   	<tr>
@@ -82,9 +72,8 @@ alert("proba");
         </table>
        </td>
        <td itemscope itemprop="location" itemtype="http://schema.org/Place" class="location">
-                <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-       
-        <table class="tableWithoutBorder">
+       	  <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        	<table class="tableWithoutBorder">
           		<tr>
           			<td>
           				Dirección:
@@ -108,9 +97,8 @@ alert("proba");
           				<span wicket:id="altitude" /><br />
           			</td>
           		</tr>
-        </table>
-                         </span>  
-                  
+        	</table>
+       	  </span>       
         </td>
         <td>
         	<table class="tableWithoutBorder">

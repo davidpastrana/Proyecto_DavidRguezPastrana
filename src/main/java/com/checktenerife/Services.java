@@ -233,11 +233,9 @@ public class Services extends HomePage {
 				selected = newSelection;
 				list.clear();
 				for (Accommodation ac : origList) {
-					if (ac.getPlace() != " ") {
-						if (ac.getPlace().equals(selected)) {
-							list.add(ac);
-						}
-					}
+					if (ac.getPlace().equals(selected)) {
+						list.add(ac);
+					}		
 				}
 			}
 
@@ -251,7 +249,10 @@ public class Services extends HomePage {
 
 	private void readFile() throws IOException {
 
-		File f = new File("/Users/David/Dropbox/bigdata_shared/remote/bigdata/alojamientos.csv");
+//		URL url = new URL("");
+//        BufferedInputStream bs = new BufferedInputStream(url.openStream());
+        
+		File f = new File("/Users/David/Dropbox/bigdata/alojamientos.csv");
 		if (!f.exists()) {
 			log.info("Error file does not exist");
 		} else {
@@ -370,10 +371,9 @@ public class Services extends HomePage {
 					ncol++;
 				}
 				list.add(ac);
-				log.info("fila ");
-				if (nfil == 2) {
-					break;
-				}
+//				if (nfil == 2) {
+//					break;
+//				}
 				nfil++;
 			}
 			br.close();
