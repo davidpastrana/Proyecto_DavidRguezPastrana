@@ -1,65 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wicket="http://wicket.apache.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:wicket="http://wicket.apache.org"
 	xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd http://wicket.apache.org">
-  <head>
-  <title>Alojamientos en Tenerife</title>
-  
-    <title>Alojamientos</title>
-  
-    <!-- External Stylesheets -->
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssreset/reset-min.css" />
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssbase/base-min.css" />
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssfonts/fonts-min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="/css/map.css" />
-  
-    <!-- Google Maps API and jQuery, served by Google -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-    
-    <!-- jQuery UI Maps files for placing markers and for parsing Microdata -->
-    <script type="text/javascript" src="/web/jquery.fn.gmap.js"></script>
-    <script type="text/javascript" src="/ui/jquery.ui.map.services.js"></script>
-    <script type="text/javascript" src="/ui/jquery.ui.map.microdata.js"></script>
-    <script type="text/javascript" src="/ui/jquery.ui.checktenerife.js"></script>
-  
-    <!-- #map_canvas -->
-    <script type="text/javascript" src="map.js"></script>
+<head>
+<title>Alojamientos en Tenerife</title>
+
+<title>Alojamientos</title>
+
+<!-- External Stylesheets -->
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/3.2.0/build/cssreset/reset-min.css" />
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/3.2.0/build/cssbase/base-min.css" />
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/3.2.0/build/cssfonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<link rel="stylesheet" type="text/css" href="/css/map.css" />
+
+<!-- Google Maps API and jQuery, served by Google -->
+<script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+
+<!-- jQuery UI Maps files for placing markers and for parsing Microdata -->
+<script type="text/javascript" src="/web/jquery.fn.gmap.js"></script>
+<script type="text/javascript" src="/ui/jquery.ui.map.services.js"></script>
+<script type="text/javascript" src="/ui/jquery.ui.map.microdata.js"></script>
+<script type="text/javascript" src="/ui/jquery.ui.checktenerife.js"></script>
+
+<!-- #map_canvas -->
+<script type="text/javascript" src="map.js"></script>
 
 
-  </head>
-  <body>
-  <wicket>
+</head>
+<body>
+	<wicket>
 
- 	<div id="header" class="roundBlock gradient ui-corner-all shadow-all">
- 		<table class="titleTable">
- 			<tr>
- 				<td>
-					Alojamientos en Tenerife<br/>
-					Open Data Cabildo
+	<div id="header" class="roundBlock gradient ui-corner-all shadow-all">
+		<table class="titleTable">
+			<tr>
+				<td>Alojamientos en Tenerife<br /> Open Data Cabildo
 				</td>
 			</tr>
- 		</table>
- 	</div>
-  	<table class="leftTable">
-  		<tr>
-  		<td id="left" class="roundBlock gradient ui-corner-all shadow-all">
-		<ul class="menu">
-  			<li class="gradient ui-corner-all shadow-all"><a href="#" wicket:id="homeLink">Inicio</a></li><br />
-  			<li class="gradient ui-corner-all shadow-all"><a href="#" wicket:id="servicesLink">Alojamientos</a></li><br />
-  			<li class="gradient ui-corner-all shadow-all"><a href="#" wicket:id="aboutUsLink">Sobre mí</a></li><br />
- 			<li class="gradient ui-corner-all shadow-all"><a href="#" wicket:id="contactLink">Contactar</a></li>
-  		</ul>
-  		</td>
-  		<td id="content" class="roundBlock gradient ui-corner-all shadow-all">
-  	<wicket:child />
-  	</td>
-  	</tr>
-  	</table>
-  	<div id="footer" class="borderedBlock gradient ui-corner-all shadow-all">
-  		@ David Rodríguez-Pastrana Parareda.
-  		Proyecto sobre Alojamientos en Tenerife. Jenkins y Sonar. Universidad La Laguna.
-  	</div>
-  </wicket>
-  </body>
+		</table>
+	</div>
+	<table class="leftTable">
+		<tr>
+			<td id="left" class="roundBlock gradient ui-corner-all shadow-all">
+				<ul class="menu">
+					<li class="gradient ui-corner-all shadow-all"><a href="#"
+						wicket:id="homeLink">Inicio</a></li>
+					<br />
+					<li class="gradient ui-corner-all shadow-all"><a href="#"
+						wicket:id="servicesLink">Alojamientos</a></li>
+					<br />
+					<li class="gradient ui-corner-all shadow-all"><a href="#"
+						wicket:id="aboutUsLink">Sobre mí</a></li>
+					<br />
+					<li class="gradient ui-corner-all shadow-all"><a href="#"
+						wicket:id="contactLink">Contactar</a></li>
+				</ul>
+			</td>
+			<td id="content" class="roundBlock gradient ui-corner-all shadow-all">
+				<wicket:child />
+			</td>
+		</tr>
+	</table>
+	<div id="footer"
+		class="borderedBlock gradient ui-corner-all shadow-all">@ David
+		Rodríguez-Pastrana Parareda. Proyecto sobre Alojamientos en Tenerife.
+		Jenkins y Sonar. Universidad La Laguna.</div>
+	</wicket>
+</body>
 </html>

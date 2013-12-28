@@ -24,7 +24,7 @@ public class Services extends HomePage {
 
 	static int nfil, ncol;
 	private static Accommodation ac;
-	private static List<Accommodation> list = new ArrayList<Accommodation>();
+	protected List<Accommodation> list = new ArrayList<Accommodation>();
 	private static List<Accommodation> origList = new ArrayList<Accommodation>();
 	private final static Logger log = LoggerFactory.getLogger(Services.class);
 

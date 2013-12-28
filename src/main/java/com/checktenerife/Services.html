@@ -1,169 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE HTML> 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wicket="http://wicket.apache.org"
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:wicket="http://wicket.apache.org"
 	xsi:schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd http://wicket.apache.org">
-  <wicket:head>
-  </wicket:head>
-  <body>
-  <wicket:extend> 
-    <div class="alignContentPage">
-	<table class="selectAccommodationTable">
-  	<tr>
-	<td><form wicket:id="formTypes">
-    	Tipo: <select wicket:id="types" name='Type' />    	
-	</form>
-	</td>
-	<td>
-	<form wicket:id="formCategories">
-    	Categoría: <select wicket:id="categories" />
-	</form>
-	</td>
-	<td>
-	<form wicket:id="formPlaces">
-    	Situación: <select wicket:id="places" />
-	</form>
-	</td>
-  </tr>
-  </table>
-      <div id="map_wrapper" class="item gradient ui-corner-all shadow-all">
-      <div id="map_canvas"></div>
-    </div>
-    <div class="accommodationRows">
-    <table style="width: 100%;" class="accommodationsTable">
-    <tr class="item gradient ui-corner-all shadow-all">
-        <th>ALOJAMIENTO</th>
-        <th>DIRECCIÓN</th>
-        <th>CONTACTO</th>
-    </tr>
-  	<tr id="row" wicket:id="rows" itemscope itemtype="http://schema.org/Event" class="gradient ui-corner-all shadow-all">	
-      <td>
-      		<table class="tableWithoutBorder">
-      		<tr>
-      			<td>
-      			<h2><a href="http://lin-clark.com/drupalcampohio" itemprop="url"><span itemprop="name" class="name" wicket:id="name" /></a></h2>
-     	 		</td>
-     	 	    <td>
-     	 	       <img itemprop="image" src='images/drupalicon_oh.png' class="logo shadow-all" /><br />    
-     	 		</td>
-     	 	</tr>
-     	 	<tr>
-     	 		<td>
-        			Tipo:
-        		</td>
-        		<td>
-        		 	<span wicket:id="type" class="place-name" />
-        		</td>
-        	</tr>
-        	<tr>
-     	 		<td>
-        			Categoria:
-        		</td>
-        		<td>
-        		 	<span wicket:id="category" />
-        		</td>
-        	</tr>
-        	<tr>
-     	 		<td>
-        			<span wicket:id="placeTag" />
-        		</td>
-        		<td>
-        		</td>
-        	</tr>
-        </table>
-       </td>
-       <td itemscope itemprop="location" itemtype="http://schema.org/Place" class="location">
-       	  <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-        	<table class="tableWithoutBorder">
-          		<tr>
-          			<td>
-          				Dirección:
-          			</td>
-          			<td>
-          				<span itemprop="streetAddress" wicket:id="address" /><br />
-          			</td>
-          		</tr>
-          		<tr>
-          			<td></td>
-          			<td>
-          				<span itemprop="addressMunicipality" wicket:id="municipality" />
-          				<span wicket:id="postalcodeTag" /><span itemprop="addressPostalCode" wicket:id="postalCode" /><br />
-          			</td>
-          		</tr>
-          		<tr>
-          			<td></td>
-          			<td>
-          				<span wicket:id="xCoordinate" />
-          				<span wicket:id="yCoordinate" />
-          				<span wicket:id="altitude" /><br />
-          			</td>
-          		</tr>
-        	</table>
-       	  </span>       
-        </td>
-        <td>
-        	<table class="tableWithoutBorder">
-        	<tr>
-        		<td>
-        			Unidades<br /> alojativas:
-        		</td>
-        		<td>
-        			<span wicket:id="availability" />
-        		</td>
-        	</tr>
-        	<tr>
-        		<td>
-        			Plazas:
-        		</td>
-        		<td>
-        			<span wicket:id="totalPlaces" />
-        		</td>
-        	</tr>
-        	<tr>
-        		<td>
-        			<span wicket:id="phoneTag" />
-        		</td>
-        		<td>
-        			<span wicket:id="phone" /> 
-        		</td>
-        	</tr>
-        	<tr>
-        		<td>
-        			<span wicket:id="faxTag" />
-        		</td>
-        		<td>
-        			<span wicket:id="fax" /> 
-        		</td>
-        	</tr>
-        	<tr>
-        		<td>
-        			<span wicket:id="emailTag" />
-        		</td>
-        		<td>
-        			<a wicket:id="email" />
-        		</td>
-        	</tr>
-        	<tr>
-        		<td>
-        			<span wicket:id="websiteTag" />
-        		</td>
-        		<td>
-        			<a wicket:id="link" target="_blank" />
-        		</td>
-        	</tr>
-        	<tr>
-        		<td>
-        			Google:
-        		</td>
-        		<td>
-        			<a wicket:id="googlelink" target="_blank">Buscar</a>
-        		</td>
-        	</tr>
-        	</table>
-        </td>
-    </tr>   
-    </table>
-    </div>
-    </div>
-  </wicket:extend>
- </body>
+<wicket:head>
+</wicket:head>
+<body>
+	<wicket:extend>
+		<div class="alignContentPage">
+			<table class="selectAccommodationTable">
+				<tr>
+					<td><form wicket:id="formTypes">
+							Tipo: <select wicket:id="types" name='Type' />
+						</form></td>
+					<td>
+						<form wicket:id="formCategories">
+							Categoría: <select wicket:id="categories" />
+						</form>
+					</td>
+					<td>
+						<form wicket:id="formPlaces">
+							Situación: <select wicket:id="places" />
+						</form>
+					</td>
+				</tr>
+			</table>
+			<div id="map_wrapper" class="item gradient ui-corner-all shadow-all">
+				<div id="map_canvas"></div>
+			</div>
+			<div class="accommodationRows">
+				<table style="width: 100%;" class="accommodationsTable">
+					<tr class="item gradient ui-corner-all shadow-all">
+						<th>ALOJAMIENTO</th>
+						<th>DIRECCIÓN</th>
+						<th>CONTACTO</th>
+					</tr>
+					<tr id="row" wicket:id="rows" itemscope
+						itemtype="http://schema.org/Event"
+						class="gradient ui-corner-all shadow-all">
+						<td>
+							<table class="tableWithoutBorder">
+								<tr>
+									<td>
+										<h2>
+											<a href="http://lin-clark.com/drupalcampohio" itemprop="url"><span
+												itemprop="name" class="name" wicket:id="name" /></a>
+										</h2>
+									</td>
+									<td><img itemprop="image" src='images/drupalicon_oh.png'
+										class="logo shadow-all" /><br /></td>
+								</tr>
+								<tr>
+									<td>Tipo:</td>
+									<td><span wicket:id="type" class="place-name" /></td>
+								</tr>
+								<tr>
+									<td>Categoria:</td>
+									<td><span wicket:id="category" /></td>
+								</tr>
+								<tr>
+									<td><span wicket:id="placeTag" /></td>
+									<td></td>
+								</tr>
+							</table>
+						</td>
+						<td itemscope itemprop="location"
+							itemtype="http://schema.org/Place" class="location"><span
+							itemprop="address" itemscope
+							itemtype="http://schema.org/PostalAddress">
+								<table class="tableWithoutBorder">
+									<tr>
+										<td>Dirección:</td>
+										<td><span itemprop="streetAddress" wicket:id="address" /><br />
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><span itemprop="addressMunicipality"
+											wicket:id="municipality" /> <span wicket:id="postalcodeTag" /><span
+											itemprop="addressPostalCode" wicket:id="postalCode" /><br />
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><span wicket:id="xCoordinate" /> <span
+											wicket:id="yCoordinate" /> <span wicket:id="altitude" /><br />
+										</td>
+									</tr>
+								</table>
+						</span></td>
+						<td>
+							<table class="tableWithoutBorder">
+								<tr>
+									<td>Unidades<br /> alojativas:
+									</td>
+									<td><span wicket:id="availability" /></td>
+								</tr>
+								<tr>
+									<td>Plazas:</td>
+									<td><span wicket:id="totalPlaces" /></td>
+								</tr>
+								<tr>
+									<td><span wicket:id="phoneTag" /></td>
+									<td><span wicket:id="phone" /></td>
+								</tr>
+								<tr>
+									<td><span wicket:id="faxTag" /></td>
+									<td><span wicket:id="fax" /></td>
+								</tr>
+								<tr>
+									<td><span wicket:id="emailTag" /></td>
+									<td><a wicket:id="email" /></td>
+								</tr>
+								<tr>
+									<td><span wicket:id="websiteTag" /></td>
+									<td><a wicket:id="link" target="_blank" /></td>
+								</tr>
+								<tr>
+									<td>Google:</td>
+									<td><a wicket:id="googlelink" target="_blank">Buscar</a></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</wicket:extend>
+</body>
 </html>

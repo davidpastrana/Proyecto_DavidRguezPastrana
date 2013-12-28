@@ -4,20 +4,6 @@
 	<classpath>
 		<dir name="${rebel.workspace.path}/bigdata/target/classes">
 		</dir>
-		<dir name="${rebel.workspace.path}/bigdata/target/test-classes">
-		</dir>
 	</classpath>
-
-	<web>
-		<link target="/">
-			<dir name="${rebel.workspace.path}/bigdata/target/m2e-wtp/web-resources">
-				<exclude name="/"/>
-			</dir>
-		</link>
-		<link target="/">
-			<dir name="${rebel.workspace.path}/bigdata/src/main/webapp">
-			</dir>
-		</link>
-	</web>
 
 </application>

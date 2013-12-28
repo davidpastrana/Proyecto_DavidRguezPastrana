@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 package com.checktenerife;
 
 import java.io.Serializable;
@@ -26,6 +30,10 @@ public class Accommodation implements Serializable {
 	public Accommodation() {
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getAddress() {
 		return address;
 	}
@@ -78,8 +86,12 @@ public class Accommodation implements Serializable {
 		return totalPlaces;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
 	public Float getxCoordinate() {
@@ -88,10 +100,6 @@ public class Accommodation implements Serializable {
 
 	public Float getyCoordinate() {
 		return yCoordinate;
-	}
-
-	public void RefreshingView() {
-
 	}
 
 	public void setAddress(String address) {
@@ -122,6 +130,10 @@ public class Accommodation implements Serializable {
 		this.link = link;
 	}
 
+	/**
+	 * 
+	 * @param municipality
+	 */
 	public void setMunicipality(String municipality) {
 		this.municipality = municipality;
 	}
